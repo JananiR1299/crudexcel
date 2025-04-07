@@ -78,7 +78,7 @@ const MainPage = () => {
         className="btn btn-primary float-end"
         onClick={() => navigate("/table")}
       >
-        Home
+        Data
       </button>
 
       <Form
