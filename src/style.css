@@ -11,14 +11,25 @@ body {
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 .logo {
-  height: 40px;
-  width: 40px;
+  width: 40px; /* Adjust size */
+  height: auto;
+  margin-right: 8px; /* Adds space between logo and name */
+}
+.heading{
+  color: black;
 }
 h1 {
   font-size: 24px;

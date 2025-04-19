@@ -16,8 +16,9 @@ const CustomCard = ({ icon: Icon, title, to, selected, onSelect }) => (
   <CardLink to={to} onClick={onSelect}>
     <Card
       sx={{
-        backgroundColor: '#4a90e2',
+        backgroundColor: '#357ac8',
         color: '#fff',
+        marginTop:17,
         minHeight: 150,
         width: { xs: '100%', sm: 250 },
         opacity: selected ? 1 : 0.4,
@@ -34,6 +35,7 @@ const CustomCard = ({ icon: Icon, title, to, selected, onSelect }) => (
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            marginTop:4,
           }}
         >
           <Icon fontSize="large" style={{ marginBottom: '0.5rem', color: 'white' }} />

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -8,69 +7,69 @@ import '../styles/Itempage.css';
 const SHEET_URL = "https://api.sheetbest.com/sheets/f94e82d3-f836-4a3f-94de-3dbff9d78a7e";
 
 const ItemPage = () => {
-  const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [showLowStockOnly, setShowLowStockOnly] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null); // For the selected item in order modal
-  const [quantity, setQuantity] = useState(0);
-  const [unit, setUnit] = useState('piece'); // Default unit
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [ setOrderedItems] = useState([]);
+  const [items, setItems] = useState([]); // To store all items
+  const [filteredItems, setFilteredItems] = useState([]); // To store filtered items based on user selection
+  const [selectedCategory, setSelectedCategory] = useState(''); // Category filter
+  const [showLowStockOnly, setShowLowStockOnly] = useState(false); // Filter for low stock items
+  const [selectedItem, setSelectedItem] = useState(null); // The item selected for ordering
+  const [quantity, setQuantity] = useState(0); // Quantity input for ordering
+  const [unit, setUnit] = useState('piece'); // Unit input for ordering
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+  const [orderedItems, setOrderedItems] = useState([]); // Orders state to store orders
 
   useEffect(() => {
-    fetchItems();
+    fetchItems(); // Fetch items from the sheet when the component mounts
   }, []);
 
   const fetchItems = async () => {
     try {
       const res = await axios.get(SHEET_URL);
       setItems(res.data);
-      setFilteredItems(res.data);
+      setFilteredItems(res.data); // Set both filtered and all items to the fetched data initially
     } catch (err) {
       console.error("Failed to fetch items", err);
     }
   };
 
   const handleLowStock = () => {
-    const lowStock = items.filter(item => parseInt(item.Quantity) < 10);
+    const lowStock = items.filter(item => parseInt(item.Quantity) < 10); // Filter items with stock less than 10
     setFilteredItems(lowStock);
-    setShowLowStockOnly(true);
+    setShowLowStockOnly(true); // Set the filter state to low stock
   };
 
   const handleCategoryFilter = (category) => {
-    setSelectedCategory(category);
+    setSelectedCategory(category); // Set selected category
     let filtered = items.filter(item => item.Category === category);
     if (showLowStockOnly) {
-      filtered = filtered.filter(item => parseInt(item.Quantity) < 10);
+      filtered = filtered.filter(item => parseInt(item.Quantity) < 10); // Apply low stock filter if enabled
     }
-    setFilteredItems(filtered);
+    setFilteredItems(filtered); // Set filtered items based on category and stock
   };
 
   const resetFilters = () => {
-    setFilteredItems(items);
+    setFilteredItems(items); // Reset filters and show all items
     setSelectedCategory('');
     setShowLowStockOnly(false);
   };
 
   const handleOrderClick = (item) => {
-    setSelectedItem(item);
-    setIsModalOpen(true); // Open modal when the order button is clicked
+    setSelectedItem(item); // Set selected item for ordering
+    setIsModalOpen(true); // Open modal
   };
 
   const handleSaveOrder = () => {
     if (selectedItem && quantity > 0) {
-      const order = { ...selectedItem, quantity, unit };
-      setOrderedItems(prev => [...prev, order]); // Add to orders list
-      setIsModalOpen(false);
-      setQuantity(0); // Reset quantity
+      const order = { ...selectedItem, quantity, unit }; // Prepare the order details
+      setOrderedItems(prev => [...prev, order]); // Add new order to the list of orders
+      setIsModalOpen(false); // Close the modal
+      setQuantity(0); // Reset quantity input
     }
   };
 
   return (
     <div className="item-page">
       <div className="subheader">
-        <h2> Items </h2>
+        <h2>Items</h2>
         <div className="filter-buttons">
           <button onClick={handleLowStock} className="btn-rounded">Low Stock</button>
           <select
@@ -129,7 +128,6 @@ const ItemPage = () => {
                         </button>
                       )}
                     </td>
-
                   </tr>
                 );
               })
@@ -165,8 +163,27 @@ const ItemPage = () => {
         <button onClick={() => setIsModalOpen(false)} style={{ backgroundColor: '#f44336' }}>Cancel</button>
       </Modal>
 
+      {/* Link to add item */}
       <div className="add-item-link-wrapper">
         <Link to="/add-item" className="card-link">➕ Add Item</Link>
+      </div>
+
+      {/* Show ordered items in the "Ordered" section */}
+      <div className="ordered-items">
+        <h3>Ordered Items</h3>
+        {orderedItems.length > 0 ? (
+          <ul>
+            {orderedItems.map((order, idx) => (
+              <li key={idx}>
+                <div><strong>Name:</strong> {order.Name}</div>
+                <div><strong>Quantity:</strong> {order.quantity}</div>
+                <div><strong>Unit:</strong> {order.unit}</div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No orders yet.</p>
+        )}
       </div>
     </div>
   );
