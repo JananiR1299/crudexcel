@@ -1,0 +1,95 @@
+.item-page {
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .subheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .low-stock-btn {
+    border-radius: 20px;
+    background-color: #e0e0e0;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .filter-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .filter-buttons button,
+  .filter-buttons select {
+    padding: 8px 12px;
+    border: none;
+    background-color: #1976d2;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .filter-buttons select {
+    background-color: #1565c0;
+  }
+  
+  .card-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  
+  .item-card {
+    background-color: #f4f6f8;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .item-card h3 {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .item-card p {
+    margin: 4px 0;
+  }
+  
+  .add-item-link-wrapper {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+  
+  .card-link {
+    display: inline-block;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: rgba(138, 43, 226, 0.7); /* semi-transparent violet */
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-link:hover {
+    background-color: rgba(138, 43, 226, 0.9);
+  }
+  
+  .btn-rounded {
+    border-radius: 20px;
+    background-color: #4a90e2;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
