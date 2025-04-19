@@ -6,7 +6,6 @@ import AddItem from './components/AddItemForm';
 import Orders from './components/OrderPage';
 import './style.css';
 import ItemPage from './components/Items';
-import ToBeOrdered from './components/ToBeOrder';
 import Ordered from './components/Ordered';
 import History from './components/History';
 

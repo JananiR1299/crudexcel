@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaEdit, FaTrash, FaSave, FaTimes } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const SHEET_URL = "https://api.sheetbest.com/sheets/f94e82d3-f836-4a3f-94de-3dbff9d78a7e";
 const CATEGORY_OPTIONS = ['Softdrink', 'Fruits', 'Snacks', 'Dairy'];
